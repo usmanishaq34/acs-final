@@ -52,19 +52,11 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
-export function faqSchema(faqs: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
+export function faqSchema(_faqs: { question: string; answer: string }[]) {
+  // FAQ schema disabled — Google's parser was flagging duplicates due to a
+  // Next.js 14 RSC hydration quirk. Page FAQ content remains visible to
+  // users; we just no longer emit FAQPage structured data.
+  return null;
 }
 
 export function organizationSchema() {

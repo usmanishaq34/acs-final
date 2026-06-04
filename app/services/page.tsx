@@ -52,9 +52,9 @@ const faqs = [
 ];
 
 export default function ServicesPage() {
-  const ldData: object[] = [
+const ldData: (object | null)[] = [
     breadcrumbSchema([
-     { name: 'Home', url: 'https://www.automationconsultingservices.org/' },
+      { name: 'Home', url: 'https://www.automationconsultingservices.org/' },
       { name: 'Services', url: 'https://www.automationconsultingservices.org/services' },
     ]),
     faqSchema(faqs),
