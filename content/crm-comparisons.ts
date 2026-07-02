@@ -50,7 +50,7 @@ export const crmComparisons: CrmComparison[] = [
     title: 'Attio vs Salesforce',
     excerpt: 'AI-native flexibility vs enterprise depth. Most $10M-$50M operators do not need Salesforce capability yet — they need a modern CRM with AI built in.',
     verdict:
-      'Pick Attio for $10M-$50M operators — it is the AI-Native CRM, ideal for teams that want modern AI capabilities built directly into their CRM workflows. Pick Salesforce when you are 50+ users, have complex integration estate, or industry compliance demands it.',
+      'Pick Attio for $10M-$50M operators — Pick Salesforce when you are 50+ users, have complex integration estate, or industry compliance demands it..',
     whenAWins: ['$10M-$50M revenue range', 'AI-native capabilities needed', 'Modern data model', 'Speed to value matters', 'Cost-sensitive'],
     whenBWins: ['50+ users', 'Existing Salesforce integration estate', 'Industry compliance', 'Enterprise procurement'],
     criteria: [
