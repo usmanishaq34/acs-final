@@ -35,12 +35,12 @@ export default function Header() {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .nav-dropdown{opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity 0.18s ease,transform 0.18s ease;}
         .nav-trigger:hover .nav-dropdown,.nav-trigger:focus-within .nav-dropdown{opacity:1;transform:translateY(0);pointer-events:auto;}
         .nav-dropdown::before{content:'';position:absolute;top:-12px;left:0;right:0;height:12px;}
         .mobile-menu{transition:opacity 0.2s ease,transform 0.2s ease;}
-      `}</style>
+      ` }} />
 
       <header className="bg-white border-b border-ink-10 sticky top-0 z-40">
         <div className="container-x flex items-center justify-between py-4">
