@@ -1,4 +1,7 @@
+import dns from "node:dns";
 import { NextResponse } from "next/server";
+
+dns.setDefaultResultOrder("ipv4first");
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +13,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Failed" }, { status: 500 });
     }
 
-    const res = await fetch(webhookUrl, {
+    void fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -22,12 +25,13 @@ export async function POST(req: Request) {
         submittedAt: new Date().toISOString(),
         source: "website-contact-form",
       }),
-    });
-
-    if (!res.ok) {
-      console.error("n8n webhook failed:", res.status, await res.text());
-      return NextResponse.json({ error: "Failed" }, { status: 500 });
-    }
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          console.error("n8n webhook failed:", res.status, await res.text());
+        }
+      })
+      .catch((err) => console.error("n8n webhook error:", err));
 
     return NextResponse.json({ success: true });
   } catch (err) {
