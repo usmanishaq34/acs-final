@@ -129,7 +129,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 </div>
 
                 <div className="flex flex-col">
-                 
+                  <div className="text-sm text-white font-semibold leading-none">
+                    {post.author_name || "Usman Ishaq"}
+                  </div>
 
                   <div className="text-xs text-white/60 mt-1">
                     Founder & Lead Architect
