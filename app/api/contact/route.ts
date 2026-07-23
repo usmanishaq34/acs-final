@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Failed" }, { status: 500 });
     }
 
-    void fetch(webhookUrl, {
+    const res = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,13 +25,12 @@ export async function POST(req: Request) {
         submittedAt: new Date().toISOString(),
         source: "website-contact-form",
       }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          console.error("n8n webhook failed:", res.status, await res.text());
-        }
-      })
-      .catch((err) => console.error("n8n webhook error:", err));
+    });
+
+    if (!res.ok) {
+      console.error("n8n webhook failed:", res.status, await res.text());
+      return NextResponse.json({ error: "Failed" }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

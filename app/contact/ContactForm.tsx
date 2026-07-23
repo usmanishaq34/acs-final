@@ -47,7 +47,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
@@ -68,12 +68,18 @@ export default function ContactForm() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    setStatus("success");
-    void fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data, name: nameValue, company, email: emailValue, message }),
-    }).catch((err) => console.error("Contact form submit failed:", err));
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, name: nameValue, company, email: emailValue, message }),
+      });
+      setStatus(res.ok ? "success" : "error");
+    } catch (err) {
+      console.error("Contact form submit failed:", err);
+      setStatus("error");
+    }
   };
 
   if (status === "success") return (
